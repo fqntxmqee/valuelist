@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  
+  <bean id="csvDisplayProvider"   class="net.mlw.vlh.web.tag.support.CsvDisplayProvider"/>
+  <bean id="excelDisplayProvider" class="net.mlw.vlh.web.tag.support.ExcelDisplayProvider"/> 
+  
+  <bean id="classicLook" singleton="true" class="net.mlw.vlh.web.ValueListConfigBean">
+    <property name="displayHelper"><bean class="net.mlw.vlh.web.util.PassThroughDisplayHelper" /></property>
+    <property name="linkEncoder"><bean class="net.mlw.vlh.web.tag.support.DefaultLinkEncoder" /></property>
+    
+    <property name="messageSource">
+      <bean class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename"><value>classicLook</value></property>                    
+        <property name="parentMessageSource"><ref bean="resourceI18nBundle" /></property>  
+      </bean>
+    </property>
+    <property name="styleCount"><value>8</value></property>
+    <property name="stylePrefix"><value>classicLook</value></property>
+    
+    <property name="displayProviders">
+      <map>
+        <entry key="html">
+          <bean id="classicLookHtmlDisplayProvider" class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider">
+            <property name="imageHome"><value>images</value></property>
+			<property name="preAppendContextPath"><value>true</value></property>
+          </bean>
+        </entry>
+        <entry key="csv"><ref bean="csvDisplayProvider" /></entry>
+        <entry key="excel"><ref bean="excelDisplayProvider" /></entry>
+      </map>
+    </property>
+  </bean>
+  
+  <bean id="simpleLook" singleton="true" class="net.mlw.vlh.web.ValueListConfigBean">
+    <property name="displayHelper">
+      <bean class="net.mlw.vlh.web.util.PassThroughDisplayHelper" />
+    </property>
+    <property name="messageSource">
+      <bean class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename"><value>simpleLook</value></property>
+        <property name="parentMessageSource"><ref bean="resourceI18nBundle" /></property>                   
+      </bean>
+    </property>
+    <property name="stylePrefix"><value>simpleLook</value></property>
+    <property name="nullToken"><value>~</value></property>
+    
+    <property name="displayProviders">
+      <map>
+        <entry key="html">
+          <bean class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider">
+            <property name="imageHome"><value>images/simpleLook</value></property>
+          </bean>
+        </entry>
+        <entry key="csv"><ref bean="csvDisplayProvider" /></entry>
+        <entry key="excel"><ref bean="excelDisplayProvider" /></entry>
+      </map>
+    </property>
+    
+  </bean>
+
+  <bean id="microsoftLook" singleton="true" class="net.mlw.vlh.web.ValueListConfigBean">
+    <property name="displayHelper"><bean class="net.mlw.vlh.web.util.ImagesHomeDisplayHelper" /></property>
+    <property name="messageSource">
+      <bean class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename"><value>microsoftLook</value></property>                    
+      </bean>
+    </property>
+
+    <property name="stylePrefix"><value>microsoftLook</value></property>
+    
+    <property name="displayProviders">
+      <map>
+        <entry key="html">
+          <bean class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider">
+            <property name="imageHome"><value>images/microsoftLook</value></property>
+            <property name="usePadding"><value>false</value></property>
+            <property name="useNoWrap"><value>false</value></property>
+			<property name="preAppendContextPath"><value>true</value></property>
+          </bean>
+        </entry>
+        <entry key="csv"><ref bean="csvDisplayProvider" /></entry>
+        <entry key="excel"><ref bean="excelDisplayProvider" /></entry>
+      </map>
+    </property>
+    
+  </bean>
+  
+  
+
+</beans>

@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>net.mlw</groupId>
 	<artifactId>vlh</artifactId>
-	<version>0.1.9</version>
+	<version>release</version>
 	<packaging>jar</packaging>
 	<name>valuelist</name>
+	<description>Java Web Pages</description>
+	<url>http://github.com/fqntxmqee/valuelist</url>
+
+	<licenses>
+		<license>
+      			<name>The Apache Software License, Version 2.0</name>
+      			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      			<distribution>repo</distribution>
+    		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com/fqntxmqee/valuelist.git</url>
+		<connection>scm:git:git@github.com/fqntxmqee/valuelist.git</connection>
+		<developerConnection>scm:git:git@github.com/fqntxmqee/valuelist.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>fqntxmqee</id>
+			<name>Guoqing Huang</name>
+			<email>guoqing.huang@foxmail.com</email>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -187,6 +211,37 @@
 		</pluginManagement>
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<!-- 资源插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -215,6 +270,35 @@
 						</manifest>
 					</archive>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<goals>install</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				
+				<version>2.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -254,12 +338,7 @@
 		</plugins>
 	</reporting>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>Codehaus repository</id>
-			<url>http://repository.codehaus.org</url>
-		</pluginRepository>
-	</pluginRepositories>
+	
 
 	<!-- distributionManagement 用于向nexus 服务器上deploy mvn deploy <distributionManagement> 
 		<repository> <id>nexus-releases</id> <name>Nexus Release Repository</name> 
@@ -267,4 +346,67 @@
 		<snapshotRepository> <id>nexus-snapshots</id> <name>Nexus Snapshot Repository</name> 
 		<url>http://192.168.1.250/nexus/content/repositories/snapshots</url> </snapshotRepository> 
 		</distributionManagement> -->
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.1.2</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.7</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.3</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

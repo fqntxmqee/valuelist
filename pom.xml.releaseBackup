@@ -276,7 +276,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
-					<goals>install</goals>
+					<connectionType>developerConnection</connectionType>
 				</configuration>
 			</plugin>
 			<plugin>

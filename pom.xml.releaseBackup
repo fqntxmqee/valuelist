@@ -5,7 +5,7 @@
 
 	<groupId>net.mlw</groupId>
 	<artifactId>vlh</artifactId>
-	<version>0.1.9-SNAPSHOT</version>
+	<version>0.1.10-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>valuelist</name>
@@ -284,6 +284,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
+					<pushChanges>false</pushChanges>
 					<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
 			</plugin>

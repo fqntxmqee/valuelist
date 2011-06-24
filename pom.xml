@@ -7,22 +7,23 @@
 	<artifactId>vlh</artifactId>
 	<version>0.1.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
+
 	<name>valuelist</name>
 	<description>Java Web Pages</description>
 	<url>http://github.com/fqntxmqee/valuelist</url>
 
 	<licenses>
 		<license>
-      			<name>The Apache Software License, Version 2.0</name>
-      			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      			<distribution>repo</distribution>
-    		</license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
 
 	<scm>
-		<url>git@github.com/fqntxmqee/valuelist.git</url>
-		<connection>scm:git:git@github.com/fqntxmqee/valuelist.git</connection>
-		<developerConnection>scm:git:git@github.com/fqntxmqee/valuelist.git</developerConnection>
+		<url>ssh://git@github.com/fqntxmqee/webframe</url>
+		<connection>scm:git:ssh://git@github.com/fqntxmqee/webframe</connection>
+		<developerConnection>scm:git:ssh://git@github.com/fqntxmqee/webframe</developerConnection>
 	</scm>
 
 	<developers>
@@ -182,9 +183,7 @@
 						</execution>
 					</executions>
 					<configuration>
-						<!-- 跳过测试 <skipTests>true</skipTests> <systemProperties> <property> 
-							<name>net.sourceforge.cobertura.datafile</name> <value>${project.build.directory}/cobertura/cobertura.ser</value> 
-							</property> </systemProperties> -->
+						<!-- 跳过测试 <skipTests>true</skipTests> -->
 					</configuration>
 				</plugin>
 
@@ -283,8 +282,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				
 				<version>2.1</version>
+				<configuration>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -340,24 +341,12 @@
 
 	
 
-	<!-- distributionManagement 用于向nexus 服务器上deploy mvn deploy <distributionManagement> 
+	<!-- distribut -->
+	<distributionManagement> 
 		<repository> <id>nexus-releases</id> <name>Nexus Release Repository</name> 
 		<url>http://192.168.1.250/nexus/content/repositories/releases</url> </repository> 
 		<snapshotRepository> <id>nexus-snapshots</id> <name>Nexus Snapshot Repository</name> 
 		<url>http://192.168.1.250/nexus/content/repositories/snapshots</url> </snapshotRepository> 
-		</distributionManagement> -->
-	
-	<distributionManagement>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
 	</distributionManagement>
 
 	<profiles>

@@ -5,7 +5,7 @@
 
 	<groupId>net.mlw</groupId>
 	<artifactId>vlh</artifactId>
-	<version>0.1.9</version>
+	<version>0.1.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>valuelist</name>
@@ -276,7 +276,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
-					<goals>install</goals>
+					<connectionType>developerConnection</connectionType>
 				</configuration>
 			</plugin>
 			<plugin>
